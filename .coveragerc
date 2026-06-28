@@ -1,0 +1,9 @@
+[run]
+omit = 
+    */tests/*
+    */nsist/_system_path.py
+
+[paths]
+package =
+    nsist/
+    */site-packages/nsist

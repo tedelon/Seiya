@@ -1,0 +1,7 @@
+jinja2
+requests
+distlib
+yarg
+requests_download
+sphinxcontrib_github_alt
+sphinx-rtd-theme

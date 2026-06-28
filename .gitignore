@@ -1,0 +1,47 @@
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.egg-info/
+*.egg
+
+# Build artifacts
+build/
+dist/
+MANIFEST
+pynsist_pkgs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Caches
+.cache/
+.tox/
+.coverage
+htmlcov/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated icons (auto-converted from PNG/JPG during build)
+*_converted.ico
+
+# Test artifacts
+test.cfg
+demo.py
+myapp.ico
+mylogo.png
+
+# Documentation build
+doc/_build/
+
+# Big example files
+examples/pygi_mpl_numpy/pygi.exe
