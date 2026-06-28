@@ -39,6 +39,9 @@ test.cfg
 demo.py
 myapp.ico
 mylogo.png
+logo.ico
+需求.md
+examples/screen/
 
 # Documentation build
 doc/_build/

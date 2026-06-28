@@ -2,6 +2,8 @@
 
 **Enhanced Python Windows Installer Builder**
 
+> **Fork Notice**: Seiya is a derivative work based on [pynsist](https://github.com/takluyver/pynsist) by Thomas Kluyver, distributed under the MIT License. Original copyright © 2014 Thomas Kluyver. Seiya modifications copyright © 2026 Seiya Contributors. See [LICENSE](LICENSE) for full copyright and license text. Seiya is **not** affiliated with or endorsed by the original pynsist project — it is an independent enhanced fork. The `pynsist` command is preserved solely for backward compatibility with existing user config files.
+
 Seiya is an enhanced fork of [pynsist](https://github.com/takluyver/pynsist) that builds Windows installers for Python applications. It bundles Python itself, so you can distribute your application to users who don't have Python installed.
 
 ## Key Enhancements
@@ -327,6 +329,19 @@ Remove-Item -Recurse -Force "build/nsis"
 
 MIT License — see [LICENSE](LICENSE).
 
+- Original pynsist code: Copyright © 2014 Thomas Kluyver
+- Seiya modifications: Copyright © 2026 Seiya Contributors
+
+This project reuses code from the following third-party projects under their respective licenses:
+- [pynsist](https://github.com/takluyver/pynsist) (MIT) by Thomas Kluyver
+- [distlib](https://bitbucket.org/pypa/distlib) (Python Software Foundation License) — provides launcher EXE binaries
+- `nsist/_system_path.py` (BSD license) — see file header for details
+- `nsist/glossyorb.ico` (CC Attribution 3.0) — by Mysitemyway.com
+
 ## Acknowledgments
 
 Seiya is based on [pynsist](https://github.com/takluyver/pynsist) by Thomas Kluyver. Thanks to the pynsist contributors and the distlib project for the launcher mechanism.
+
+## Disclaimer
+
+Seiya is an independent project and is **not** affiliated with, endorsed by, or sponsored by the original pynsist project or its author. The `pynsist` command-line entry point is provided solely for backward compatibility with existing user configuration files, and does not imply any relationship with the original project. All trademarks belong to their respective owners.

@@ -4,6 +4,23 @@
 
 Seiya V1.0.0 — first public release. Enhanced fork of [pynsist](https://github.com/takluyver/pynsist) for building Windows installers of Python applications.
 
+### Attribution & License
+
+Seiya is a derivative work based on pynsist by Thomas Kluyver
+(https://github.com/takluyver/pynsist), distributed under the MIT License.
+
+- Original pynsist code: Copyright © 2014 Thomas Kluyver
+- Seiya modifications: Copyright © 2026 Seiya Contributors
+
+Seiya is **not** affiliated with, endorsed by, or sponsored by the original
+pynsist project or its author. The `pynsist` command-line entry point is
+preserved solely for backward compatibility with existing user config files.
+
+Third-party assets reused under their respective licenses:
+- `nsist/_system_path.py` — BSD license (see file header)
+- `nsist/glossyorb.ico` — CC Attribution 3.0 (Mysitemyway.com)
+- distlib launcher binaries — Python Software Foundation License
+
 ### Highlights
 
 - **Standalone `.exe` launchers** — Replaces the old `.launch.pyw` script approach with native `.exe` launchers built on the distlib launcher mechanism (`[launcher exe] + [shebang] + [zip(__main__.py)]`)

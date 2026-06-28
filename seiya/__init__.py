@@ -4,6 +4,13 @@ Seiya is an enhanced fork of pynsist that builds Windows installers for Python
 applications. It bundles Python itself, so you can distribute your application
 to people who don't have Python installed.
 
+Attribution:
+  This is a derivative work based on pynsist by Thomas Kluyver
+  (https://github.com/takluyver/pynsist), distributed under the MIT License.
+  Original copyright (c) 2014 Thomas Kluyver.
+  Seiya modifications copyright (c) 2026 Seiya Contributors.
+  Seiya is not affiliated with or endorsed by the original pynsist project.
+
 Key enhancements over pynsist:
   - Generates standalone .exe launchers (using distlib launcher mechanism)
   - Auto-resolves transitive dependencies (only list direct dependencies)
@@ -13,7 +20,7 @@ Key enhancements over pynsist:
 
 Compatibility:
   - Fully compatible with existing pynsist config files
-  - The 'pynsist' command still works as an alias
+  - The 'pynsist' command still works as an alias (backward compatibility only)
   - New 'seiya' command provides the same functionality
 
 Usage:
