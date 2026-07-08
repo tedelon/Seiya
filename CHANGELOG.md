@@ -1,5 +1,13 @@
 # Changelog
 
+## V1.0.2 (2026-07-08)
+
+Bugfix release — fixes dependency resolution crash with packages that declare non-importable top-level modules.
+
+### Bug Fixes
+
+- **`ImportError: Could not find 'mapi'`** — Packages like `pywin32` declare many top-level modules in `top_level.txt` (e.g. `mapi`, `exchange`, `pythonwin`, `adsi`) that are not importable in the build environment (pyd files requiring post-install, optional Windows sub-systems). The `copy_modules()` function now skips these with a warning instead of aborting the build.
+
 ## V1.0.1 (2026-07-08)
 
 Critical bugfix release — fixes `.pyw` files being generated instead of `.exe` launchers in clean environments.

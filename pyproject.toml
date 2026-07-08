@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "seiya"
-version = "1.0.1"
+version = "1.0.2"
 description = "Enhanced Python Windows Installer Builder - fork of pynsist with .exe launchers, auto dependency resolution and custom logo support"
 authors = [
     {name = "Seiya Contributors"},

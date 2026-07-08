@@ -373,7 +373,15 @@ def copy_modules(modnames, target, py_version, path=None, exclude=None):
         if modname in files_in_target_noext:
             # Already there, no need to copy it.
             continue
-        mc.copy(modname, target, exclude)
+        try:
+            mc.copy(modname, target, exclude)
+        except ImportError as e:
+            # Some packages (e.g. pywin32) declare many top-level modules in
+            # top_level.txt that are not importable in the build environment
+            # (pyd files needing post-install, optional sub-systems like mapi,
+            # exchange, pythonwin, etc.). Skip these with a warning instead of
+            # aborting the entire build.
+            logger.warning('Could not copy module %r: %s', modname, e)
 
     # Copy .dist-info metadata directories so importlib.metadata works at runtime
     _copy_dist_info(target, mod_to_distname)
