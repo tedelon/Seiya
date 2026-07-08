@@ -119,7 +119,27 @@ class ModuleCopier:
             raise ImportError('Could not find %r' % modname)
         loader = spec.loader
         if loader is None:
-            raise ImportError('Cannot bundle namespace package %r' % modname)
+            # Namespace package (no __init__.py) — copy the entire directory.
+            # This handles packages like pywin32's 'win32' and 'win32comext'
+            # that contain .pyd/.py files but lack an __init__.py.
+            search_locations = getattr(spec, 'submodule_search_locations', None) or []
+            for location in search_locations:
+                if os.path.isdir(location):
+                    dest = os.path.join(target, modname)
+                    if os.path.exists(dest):
+                        return
+                    if exclude:
+                        shutil.copytree(
+                            location, dest,
+                            ignore=partial(copytree_ignore_callback, exclude, location, modname)
+                        )
+                    else:
+                        shutil.copytree(
+                            location, dest,
+                            ignore=shutil.ignore_patterns('*.pyc', '__pycache__')
+                        )
+                    return
+            raise ImportError('Cannot bundle namespace package %r (directory not found)' % modname)
 
         pkg = loader.is_package(modname)
 
@@ -244,6 +264,11 @@ def resolve_dependencies(modnames, py_version=None):
             tops = dist.read_text('top_level.txt')
             if tops:
                 for top in tops.strip().splitlines():
+                    # top_level.txt may contain paths like 'win32\lib\afxres';
+                    # take only the top-level component.
+                    top = top.strip().replace('\\', '/').split('/')[0]
+                    if not top:
+                        continue
                     import_to_dist[top.lower().replace('-', '_')] = name.lower()
             else:
                 # Fallback: assume import name == dist name (with - → _)
@@ -283,6 +308,11 @@ def resolve_dependencies(modnames, py_version=None):
             tops = dist.read_text('top_level.txt')
             if tops:
                 for top in tops.strip().splitlines():
+                    # top_level.txt may contain paths like 'win32\lib\afxres';
+                    # take only the top-level component.
+                    top = top.strip().replace('\\', '/').split('/')[0]
+                    if not top:
+                        continue
                     topkey = top.lower().replace('-', '_')
                     if topkey not in resolved:
                         # Add to queue so its dependencies are also resolved
@@ -305,6 +335,9 @@ def resolve_dependencies(modnames, py_version=None):
                 if not _eval_marker(marker, target_py_version=target_py_version):
                     continue
                 req = req_part
+            # Handle old-style "package (>=version)" format
+            if '(' in req:
+                req = req.split('(')[0].strip()
             # Extract package name (before any version specifier)
             depname = req.strip().split('>')[0].split('<')[0].split('=')[0].split('!')[0].split('~')[0].strip()
             if not depname:

@@ -1,5 +1,15 @@
 # Changelog
 
+## V1.0.3 (2026-07-08)
+
+Bugfix release — fixes three critical issues causing generated .exe to fail at runtime.
+
+### Bug Fixes
+
+- **Namespace packages now copied as directories** — Packages like pywin32's `win32` and `win32comext` lack `__init__.py` and were treated as namespace packages, previously skipped with "Cannot bundle namespace package" error. Now the entire directory tree is copied to the build output, so `.pyd` and `.py` files inside are available at runtime.
+- **Old-style requirement parsing** — Requirements using `package (>=version)` format (from older setuptools metadata) were incorrectly parsed, producing module names like `markdown_it_py (` and `six (`. Now the `(>=version)` suffix is stripped before extracting the package name.
+- **top_level.txt path entries** — pywin32's `top_level.txt` contains path-like entries (e.g. `win32\lib\afxres`, `win32/winxpgui`) that were treated as module names and failed to import. Now only the top-level component is extracted (`win32`), and the `win32` directory is copied as a whole.
+
 ## V1.0.2 (2026-07-08)
 
 Bugfix release — fixes dependency resolution crash with packages that declare non-importable top-level modules.

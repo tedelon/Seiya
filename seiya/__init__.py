@@ -36,7 +36,7 @@ from seiya.core import (
     __version__ as _nsist_version,
 )
 
-__version__ = '1.0.2'
+__version__ = '1.0.3'
 
 # Re-export public API for programmatic use
 InstallerBuilder = InstallerBuilder
