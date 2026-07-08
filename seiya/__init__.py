@@ -28,7 +28,7 @@ Usage:
     python -m seiya installer.cfg
     pynsist installer.cfg  (backward compatible)
 """
-from nsist import (
+from seiya.core import (
     InstallerBuilder,
     InputError,
     split_entry_point,
@@ -36,7 +36,7 @@ from nsist import (
     __version__ as _nsist_version,
 )
 
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 # Re-export public API for programmatic use
 InstallerBuilder = InstallerBuilder

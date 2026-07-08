@@ -1,10 +1,10 @@
 [build-system]
-requires = ["flit_core >=3.2.0,<4"]
-build-backend = "flit_core.buildapi"
+requires = ["setuptools >=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "seiya"
-version = "1.0.0"
+version = "1.0.1"
 description = "Enhanced Python Windows Installer Builder - fork of pynsist with .exe launchers, auto dependency resolution and custom logo support"
 authors = [
     {name = "Seiya Contributors"},
@@ -17,6 +17,7 @@ requires-python = ">=3.8"
 license = {text = "MIT"}
 dependencies = [
     "requests",
+    "requests-download",
     "jinja2",
     "yarg",
     "distlib >=0.3",
@@ -48,29 +49,20 @@ test = [
 
 [project.scripts]
 seiya = "seiya:main"
-pynsist = "nsist:main"
+pynsist = "seiya:main"
 
 [project.urls]
-Homepage = "https://github.com/seiya-builder/seiya"
-Documentation = "https://github.com/seiya-builder/seiya#readme"
-Source = "https://github.com/seiya-builder/seiya"
-Issues = "https://github.com/seiya-builder/seiya/issues"
+Homepage = "https://github.com/tedelon/Seiya"
+Documentation = "https://github.com/tedelon/Seiya#readme"
+Source = "https://github.com/tedelon/Seiya"
+Issues = "https://github.com/tedelon/Seiya/issues"
 
-[tool.flit.module]
-name = "seiya"
+[tool.setuptools]
+packages = ["seiya", "seiya.core"]
+include-package-data = true
 
-[tool.flit.sdist]
-include = [
-    "nsist/",
-    "examples/",
-    "doc/",
-    "README.md",
-    "LICENSE",
-]
-exclude = [
-    ".venv/",
-    "build/",
-    ".cache/",
-    "*.pyc",
-    "__pycache__/",
-]
+[tool.setuptools.package-data]
+"seiya.core" = ["*.ico", "*.nsi", "msvcrt/**/*"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["__pycache__", "*.pyc"]

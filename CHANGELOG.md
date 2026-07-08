@@ -1,5 +1,23 @@
 # Changelog
 
+## V1.0.1 (2026-07-08)
+
+Critical bugfix release — fixes `.pyw` files being generated instead of `.exe` launchers in clean environments.
+
+### Bug Fixes
+
+- **Missing `requests-download` dependency** — V1.0.0 omitted `requests-download` from `pyproject.toml`, causing `import` failure in clean environments (`ModuleNotFoundError: No module named 'requests_download'`). Now explicitly listed as a dependency.
+- **`nsist` package name conflict** — V1.0.0 used `nsist` as the internal package name, colliding with the original pynsist. If users installed original pynsist as a workaround, the original `nsist` package overwrote seiya's enhanced version, reverting to `.pyw` script generation. Resolved by merging all code into `seiya/core/` subpackage — seiya is now fully self-contained with zero dependency on a `nsist` package.
+- **Broken shebang in `commands.py`** — `prepare_bin_directory()` used `#!<launcher_dir>\\..\\Python\\python.exe`, but `<launcher_dir>` is not a token the distlib launcher resolves. Fixed to `#!..\\Python\\python.exe` (true relative path).
+- **`pynsist` entry point conflict** — V1.0.0 registered `pynsist = "nsist:main"`, conflicting with original pynsist. Changed to `pynsist = "seiya:main"`.
+
+### Changes
+
+- Merged `nsist/` → `seiya/core/` subpackage (all modules, templates, and `msvcrt/` DLLs)
+- `seiya/__init__.py` now imports from `seiya.core` instead of `nsist`
+- `pyproject.toml`: `packages = ["seiya", "seiya.core"]`, `package-data` targets `seiya.core`
+- Version updated to 1.0.1
+
 ## V1.0.0 (2026-06-28)
 
 Seiya V1.0.0 — first public release. Enhanced fork of [pynsist](https://github.com/takluyver/pynsist) for building Windows installers of Python applications.
@@ -17,8 +35,8 @@ pynsist project or its author. The `pynsist` command-line entry point is
 preserved solely for backward compatibility with existing user config files.
 
 Third-party assets reused under their respective licenses:
-- `nsist/_system_path.py` — BSD license (see file header)
-- `nsist/glossyorb.ico` — CC Attribution 3.0 (Mysitemyway.com)
+- `seiya/core/_system_path.py` — BSD license (see file header)
+- `seiya/core/glossyorb.ico` — CC Attribution 3.0 (Mysitemyway.com)
 - distlib launcher binaries — Python Software Foundation License
 
 ### Highlights

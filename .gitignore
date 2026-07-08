@@ -13,6 +13,7 @@ pynsist_pkgs/
 
 # Virtual environments
 .venv/
+.test_venv/
 venv/
 env/
 
